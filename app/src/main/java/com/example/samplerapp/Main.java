@@ -1,3 +1,10 @@
+//TODO figure out how to import and save audio
+//TODO make the 1-16 buttons play the audio
+//TODO implement a way to change BPM and have it affect the recorded playback
+//TODO display the audio waveform
+// be able to edit said wave form
+
+
 package com.example.samplerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +36,10 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
          record = false;
          play =false;
         //Buttons buttons buttons!!!
+        //TODO not to important, try to clean this up
         Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16;
         Button rBtn = findViewById(R.id.recordBtn);
+        Button play = findViewById(R.id.playBtn);
         View box = findViewById(R.id.outerBox);
         b1 = findViewById(R.id.buttonOne);
         b2 = findViewById(R.id.buttonTwo);
@@ -66,6 +75,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         b15.setBackgroundColor(0xFFECE2BC);
         b16.setBackgroundColor(0xFFECE2BC);
         rBtn.setBackgroundColor(0xFFECE2BC);
+        play.setBackgroundColor(0xFFECE2BC);
         box.setBackgroundColor(0XFF0A0A10);
 
 
@@ -85,20 +95,24 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         b14.setOnTouchListener(this);
         b15.setOnTouchListener(this);
         b16.setOnTouchListener(this);
+        rBtn.setOnTouchListener(this);
 
+    //TODO make the play button go through all element of the arraylist and loop through their outputs
 
     }
 
 
-    //onTouch method for main "noteButtons"
+    //onTouch method for main "Buttons"
     public boolean onTouch (View view, MotionEvent motionEvent){
         TextView text = findViewById(R.id.outerBox);
 
+        if(record == true){
+                nOrder.add(view.getId());
+            }
         switch (view.getId()) {
             case R.id.buttonOne:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-
                     text.setText("one");
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -241,20 +255,25 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     text.setText("");
                 }
                 break;
-            case R.id.recordBtn:
-                if(record==false){
-                    record = true;
-                    view.setBackgroundColor(0xFFE73939);
-                }
-                if(record==true){
-                    record = false;
-                    view.setBackgroundColor(0xFFECE2BC);
-                }
 
+            case R.id.recordBtn:
+
+                if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
+                    if (record == false) {
+                        record = true;
+                        view.setBackgroundColor(0xFFE73939);
+                    }
+                    else if (record == true) {
+                        record = false;
+                        view.setBackgroundColor(0xFFECE2BC);
+                    }
+                }
+                break;
+                //TODO add play button functionality
         }
 
 
-        return false;
+        return true;
     }
 
     }
