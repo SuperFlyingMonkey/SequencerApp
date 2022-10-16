@@ -3,7 +3,7 @@
 //TODO implement a way to change BPM and have it affect the recorded playback
 //TODO display the audio waveform
 // be able to edit said wave form
-
+//TODO add slider
 
 package com.example.samplerapp;
 
@@ -96,7 +96,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         b15.setOnTouchListener(this);
         b16.setOnTouchListener(this);
         rBtn.setOnTouchListener(this);
-
+        play.setOnTouchListener(this);
     //TODO make the play button go through all element of the arraylist and loop through their outputs
 
     }
@@ -269,7 +269,18 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     }
                 }
                 break;
-                //TODO add play button functionality
+            case R.id.playBtn:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    if(play ==false){
+                        play =true;
+                        view.setBackgroundColor(0xFFE73939);
+                    }
+                    else if (play == true){
+                        play = false;
+                        view.setBackgroundColor(0xFFECE2BC);
+                    }
+                }
+
         }
 
 
