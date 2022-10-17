@@ -10,6 +10,8 @@ package com.example.samplerapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,10 +23,14 @@ import java.util.ArrayList;
 
 public class Main extends AppCompatActivity implements View.OnTouchListener {
 
-    ArrayList nOrder;
-    boolean record;
-    boolean play;
-
+    private ArrayList nOrder;
+    private boolean record;
+    private boolean play;
+    private  Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16, rBtn,pBtn,vSlider;
+    private View box;
+    private MediaRecorder mediaRecorder;
+    private MediaPlayer mediaPlayer;
+    private String mediaPath;
     @SuppressLint({"ClickableViewAccessibility", "MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -32,15 +38,18 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         setContentView(R.layout.activity_main);
         RelativeLayout theLayout = findViewById(R.id.theLayout);
         theLayout.setBackgroundColor(0xFF151515);
+
+
+        //***Initializing Stuff***
          nOrder = new ArrayList();
          record = false;
          play =false;
-        //Buttons buttons buttons!!!
-        //TODO not to important, try to clean this up
-        Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16;
-        Button rBtn = findViewById(R.id.recordBtn);
-        Button play = findViewById(R.id.playBtn);
-        View box = findViewById(R.id.outerBox);
+
+         //Buttons buttons buttons!!!
+        vSlider = findViewById(R.id.volumeSlider);
+        rBtn = findViewById(R.id.recordBtn);
+        pBtn = findViewById(R.id.playBtn);
+        box = findViewById(R.id.outerBox);
         b1 = findViewById(R.id.buttonOne);
         b2 = findViewById(R.id.buttonTwo);
         b3 = findViewById(R.id.buttonThree);
@@ -75,9 +84,9 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         b15.setBackgroundColor(0xFFECE2BC);
         b16.setBackgroundColor(0xFFECE2BC);
         rBtn.setBackgroundColor(0xFFECE2BC);
-        play.setBackgroundColor(0xFFECE2BC);
+        pBtn.setBackgroundColor(0xFFECE2BC);
         box.setBackgroundColor(0XFF0A0A10);
-
+        vSlider.setBackgroundColor(0XFF0A0A10);
 
         b1.setOnTouchListener(this);
         b2.setOnTouchListener(this);
@@ -96,190 +105,332 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         b15.setOnTouchListener(this);
         b16.setOnTouchListener(this);
         rBtn.setOnTouchListener(this);
-        play.setOnTouchListener(this);
+        pBtn.setOnTouchListener(this);
     //TODO make the play button go through all element of the arraylist and loop through their outputs
 
     }
 
 
-    //onTouch method for main "Buttons"
+    //Detection of UI inputs via Buttons and sliders
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     public boolean onTouch (View view, MotionEvent motionEvent){
         TextView text = findViewById(R.id.outerBox);
 
-        if(record == true){
+        if(record){
                 nOrder.add(view.getId());
             }
         switch (view.getId()) {
+
+
+            //***Note Buttons Functionality***
             case R.id.buttonOne:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("one");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("one");
+                    }
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonTwo:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("two");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("two");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonThree:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("three");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("three");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonFour:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("four");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("four");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonFive:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("five");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("five");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonSix:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("six");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("six");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonSeven:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("seven");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("seven");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonEight:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("eight");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("eight");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonNine:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("nine");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("nine");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonTen:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("ten");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("ten");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonEleven:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("eleven");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("eleven");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonTwelve:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    view.setBackgroundColor(0xFFE73939);
-                    text.setText("twelve");
+                    view.setBackgroundColor(0xFFE73939); //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("twelve");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonThirteen:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("thirteen");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("thirteen");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonFourTeen:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("fourteen");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("fourteen");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
             case R.id.buttonFifTeen:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("fifteen");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("fifteen");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
-                }
+                    if(!record) {
+                        text.setText("");
+                    }
+                    }
                 break;
             case R.id.buttonSixteen:
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
                     view.setBackgroundColor(0xFFE73939);
-                    text.setText("sixteen");
+                    //
+                    //TODO play instrument sound at pitch for button
+                    //
+                    if(!record) {
+                        text.setText("sixteen");
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
-                    text.setText("");
+                    if(!record) {
+                        text.setText("");
+                    }
                 }
                 break;
+            //***End of Note Buttons
 
+
+            //***Record Functionality***
             case R.id.recordBtn:
 
                 if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
-                    if (record == false) {
+                    if (!record && !play) {
                         record = true;
+                        text.setText("Recording...");
+                        //
+                        // TODO add recording
+                        //
+
                         view.setBackgroundColor(0xFFE73939);
                     }
-                    else if (record == true) {
+                    else if (record) {
                         record = false;
+                        text.setText("");
+                        //
+                        // TODO stop recording and save audio to file
+                        //
+
                         view.setBackgroundColor(0xFFECE2BC);
                     }
                 }
                 break;
+
+            //***Play functionality***
             case R.id.playBtn:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    if(play ==false){
+                    if(!play && !record){
                         play =true;
+                        //
+                        // TODO add playback of current track
+                        //
+                        //
+
+
                         view.setBackgroundColor(0xFFE73939);
                     }
-                    else if (play == true){
+                    else if (play){
                         play = false;
+                        //
+                        //TODO Stop playback of current track
+                        //
+                        //
+
                         view.setBackgroundColor(0xFFECE2BC);
                     }
                 }
+                break;
 
         }
 
