@@ -5,6 +5,8 @@
 // be able to edit said wave form
 //TODO add slider
 
+
+//TODO *****GET AUDIO READING AND RECORD WORKING IN SEPARATE CLASSES*****
 package com.example.samplerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -407,7 +409,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 }
                 break;
 
-            //***Play functionality***
+            //***Play button functionality***
             case R.id.playBtn:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
                     if(!play && !record){
