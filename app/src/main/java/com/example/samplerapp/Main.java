@@ -28,11 +28,11 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     private ArrayList nOrder;
     private boolean record;
     private boolean play;
-    private  Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16, rBtn,pBtn,vSlider;
-    private View box;
+    private boolean setSound;
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     private String mediaPath;
+    private waveReader soundPlay = new waveReader();
     @SuppressLint({"ClickableViewAccessibility", "MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,28 +46,29 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
          nOrder = new ArrayList();
          record = false;
          play =false;
+         setSound = false;
 
          //Buttons buttons buttons!!!
-        vSlider = findViewById(R.id.volumeSlider);
-        rBtn = findViewById(R.id.recordBtn);
-        pBtn = findViewById(R.id.playBtn);
-        box = findViewById(R.id.outerBox);
-        b1 = findViewById(R.id.buttonOne);
-        b2 = findViewById(R.id.buttonTwo);
-        b3 = findViewById(R.id.buttonThree);
-        b4 = findViewById(R.id.buttonFour);
-        b5 = findViewById(R.id.buttonFive);
-        b6 = findViewById(R.id.buttonSix);
-        b7 = findViewById(R.id.buttonSeven);
-        b8 = findViewById(R.id.buttonEight);
-        b9 = findViewById(R.id.buttonNine);
-        b10 = findViewById(R.id.buttonTen);
-        b11 = findViewById(R.id.buttonEleven);
-        b12 = findViewById(R.id.buttonTwelve);
-        b13 = findViewById(R.id.buttonThirteen);
-        b14 = findViewById(R.id.buttonFourTeen);
-        b15 = findViewById(R.id.buttonFifTeen);
-        b16 = findViewById(R.id.buttonSixteen);
+        Button vSlider = findViewById(R.id.volumeSlider);
+        Button rBtn = findViewById(R.id.recordBtn);
+        Button pBtn = findViewById(R.id.playBtn);
+        View box = findViewById(R.id.outerBox);
+        Button b1 = findViewById(R.id.buttonOne);
+        Button b2 = findViewById(R.id.buttonTwo);
+        Button b3 = findViewById(R.id.buttonThree);
+        Button b4 = findViewById(R.id.buttonFour);
+        Button b5 = findViewById(R.id.buttonFive);
+        Button b6 = findViewById(R.id.buttonSix);
+        Button b7 = findViewById(R.id.buttonSeven);
+        Button b8 = findViewById(R.id.buttonEight);
+        Button b9 = findViewById(R.id.buttonNine);
+        Button b10 = findViewById(R.id.buttonTen);
+        Button b11 = findViewById(R.id.buttonEleven);
+        Button b12 = findViewById(R.id.buttonTwelve);
+        Button b13 = findViewById(R.id.buttonThirteen);
+        Button b14 = findViewById(R.id.buttonFourTeen);
+        Button b15 = findViewById(R.id.buttonFifTeen);
+        Button b16 = findViewById(R.id.buttonSixteen);
 
         b1.setBackgroundColor(0xFFECE2BC);
         b2.setBackgroundColor(0xFFECE2BC);
@@ -131,7 +132,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(1);
                         text.setText("one");
                     }
 
@@ -148,7 +150,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(2);
                         text.setText("two");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -164,7 +167,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(3);
                         text.setText("three");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -180,7 +184,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(4);
                         text.setText("four");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -196,7 +201,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(5);
                         text.setText("five");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -209,10 +215,12 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonSix:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
+
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(6);
                         text.setText("six");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -228,7 +236,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(7);
                         text.setText("seven");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -244,7 +253,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(8);
                         text.setText("eight");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -260,7 +270,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(9);
                         text.setText("nine");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -276,7 +287,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(10);
                         text.setText("ten");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -292,7 +304,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(11);
                         text.setText("eleven");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -307,7 +320,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     view.setBackgroundColor(0xFFE73939); //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(12);
                         text.setText("twelve");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -323,7 +337,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(13);
                         text.setText("thirteen");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -339,7 +354,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(14);
                         text.setText("fourteen");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -355,7 +371,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(15);
                         text.setText("fifteen");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -371,7 +388,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     //
                     //TODO play instrument sound at pitch for button
                     //
-                    if(!record) {
+                    if(!record && setSound) {
+                        soundPlay.setSoundNum(16);
                         text.setText("sixteen");
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
