@@ -49,7 +49,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
          nOrder = new ArrayList();
          record = false;
          play =false;
-         setSound = false;
+         setSound = true;
 
          //Buttons buttons buttons!!!
         Button vSlider = findViewById(R.id.volumeSlider);
@@ -487,7 +487,12 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     }
                 }
                 break;
-
+            //***Volume slider***
+            case R.id.volumeSlider:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
+                    //TODO get current volume and display it
+                }
+                }
         }
 
 

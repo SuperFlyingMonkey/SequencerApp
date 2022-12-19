@@ -165,14 +165,15 @@
         android:layout_alignRight="@id/buttonSixteen"
         android:layout_marginBottom="125dp"
         android:id="@+id/recordBtn"/>
+
+
     <Button
+        android:id="@+id/volumeSlider"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/recordBtn"
-        android:layout_marginBottom="75dp"
-        android:id="@+id/volumeSlider"/>
-
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp" />
 
     <TextView
         android:id="@+id/outerBox"
