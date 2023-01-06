@@ -492,7 +492,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
                     //TODO get current volume and display it
                 }
-                }
+
         }
 
 
