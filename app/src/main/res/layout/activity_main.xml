@@ -14,7 +14,6 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
-        android:text=""
         android:id="@+id/buttonOne"
         />
 
@@ -87,7 +86,6 @@
         android:layout_marginLeft="40dp"
         android:layout_marginBottom="50dp"
         android:layout_alignBottom="@+id/buttonOne"
-        android:text=""
         android:id="@+id/buttonNine"
         />
 
@@ -156,6 +154,7 @@
         android:layout_alignBottom="@id/buttonFifTeen"
         android:layout_alignRight="@id/buttonSixteen"
         android:layout_marginBottom="75dp"
+        android:text="P"
         android:id="@+id/playBtn"/>
 
     <Button
@@ -164,6 +163,7 @@
         android:layout_alignBottom="@id/buttonFifTeen"
         android:layout_alignRight="@id/buttonSixteen"
         android:layout_marginBottom="125dp"
+        android:text="R"
         android:id="@+id/recordBtn"/>
 
 

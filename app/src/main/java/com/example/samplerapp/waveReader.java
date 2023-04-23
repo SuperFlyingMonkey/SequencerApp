@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
@@ -19,66 +23,51 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class waveReader {
+public class waveReader extends AppCompatActivity {
     private String file;
+    private SoundPool soundPool;
+    private int s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16;
 
-
-
-
-    public void play() throws IOException {
-        MediaPlayer mp = new MediaPlayer();
-
-        try{
-
-            String path = "SequencerApp/app/src/main/assets/dSounds";
-            mp.setDataSource(path + File.separator+file);
-            mp.prepare();
-            mp.start();
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(16)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
         }
-        catch (Exception e){
-            e.printStackTrace();
+        else{
+            soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC,0);
         }
+
+        s1 = soundPool.load(this,R.raw.keySound,1);
+        s2 = soundPool.load(this,R.raw.keySound,1);
+        s3 = soundPool.load(this,R.raw.keySound,1);
+        s4 = soundPool.load(this,R.raw.keySound,1);
+        s5 = soundPool.load(this,R.raw.keySound,1);
+        s6 = soundPool.load(this,R.raw.keySound,1);
+        s7 = soundPool.load(this,R.raw.keySound,1);
+        s8 = soundPool.load(this,R.raw.keySound,1);
+        s9 = soundPool.load(this,R.raw.keySound,1);
+        s10 = soundPool.load(this,R.raw.keySound,1);
+        s11 = soundPool.load(this,R.raw.keySound,1);
+        s12 = soundPool.load(this,R.raw.keySound,1);
+        s13 = soundPool.load(this,R.raw.keySound,1);
+        s14 = soundPool.load(this,R.raw.keySound,1);
+        s15 = soundPool.load(this,R.raw.keySound,1);
+        s16 = soundPool.load(this,R.raw.keySound,1);
+
+
+
 
     }
-    public void setSoundNum(int soundN){
-        switch (soundN){
-            case 0: file="Pluck.wav";
-            break;
-            case 1: file ="sOne.wav";
-            break;
-            case 2: file ="sTwo.wav";
-                break;
-            case 3: file ="sThree.wav";
-                break;
-            case 4: file ="sFour.wav";
-                break;
-            case 5: file ="sFive.wav";
-                break;
-            case 6: file ="sSix.wav";
-                break;
-            case 7: file ="sSeven.wav";
-                break;
-            case 8: file ="sEight.wav";
-                break;
-            case 9: file ="sNine.wav";
-                break;
-            case 10: file ="sTen.wav";
-                break;
-            case 11: file ="sEleven.wav";
-                break;
-            case 12: file ="sTwelve.wav";
-                break;
-            case 13: file ="sThirteen.wav";
-                break;
-            case 14: file ="sFourteen.wav";
-                break;
-            case 15: file ="sFifteen.wav";
-                break;
-            case 16: file ="sSixteen.wav";
-                break;
-            }
 
-    }
 }
 
 
