@@ -183,7 +183,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
                     soundPool.play(s1, 1,1,0,0,1.0F);
-                    text.setText("9");
+                    text.setText("1");
                     //TODO Give all buttons record functionality
                 //    if(!record && setSound) {
                   //      soundPlay.setSoundNum(1);
