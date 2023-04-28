@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class Main extends AppCompatActivity implements View.OnTouchListener {
 
-    private ArrayList nOrder;
+    private ArrayList<Integer>noteOrder;
     private boolean record;
     private boolean play;
     private boolean setSound;
@@ -41,7 +41,11 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     private SoundPool soundPool;
     private int soundX;
     private int s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16;
+
+
     @SuppressLint({"ClickableViewAccessibility", "MissingInflatedId", "ResourceType"})
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -66,28 +70,28 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
 
         //***Initializing Stuff***
-         nOrder = new ArrayList();
+         noteOrder = new ArrayList<Integer>();
          record = false;
          play =false;
          setSound = false;
 
         //Load Default sounds
         s1 = soundPool.load(this,R.raw.keysound,1);
-        s2 = soundPool.load(this,R.raw.keysound,1);
-        s3 = soundPool.load(this,R.raw.keysound,1);
-        s4 = soundPool.load(this,R.raw.keysound,1);
-        s5 = soundPool.load(this,R.raw.keysound,1);
-        s6 = soundPool.load(this,R.raw.keysound,1);
-        s7 = soundPool.load(this,R.raw.keysound,1);
-        s8 = soundPool.load(this,R.raw.keysound,1);
-        s9 = soundPool.load(this,R.raw.keysound,1);
-        s10 = soundPool.load(this,R.raw.keysound,1);
-        s11 = soundPool.load(this,R.raw.keysound,1);
-        s12 = soundPool.load(this,R.raw.keysound,1);
-        s13 = soundPool.load(this,R.raw.keysound,1);
-        s14 = soundPool.load(this,R.raw.keysound,1);
-        s15 = soundPool.load(this,R.raw.keysound,1);
-        s16 = soundPool.load(this,R.raw.keysound,1);
+        s2 = soundPool.load(this,R.raw.squareish,1);
+        s3 = soundPool.load(this,R.raw.wind,1);
+        s4 = soundPool.load(this,R.raw.piano,1);
+        s5 = soundPool.load(this,R.raw.organ,1);
+        s6 = soundPool.load(this,R.raw.saw,1);
+        s7 = soundPool.load(this,R.raw.buzz,1);
+        s8 = soundPool.load(this,R.raw.guitar,1);
+        s9 = soundPool.load(this,R.raw.ukulele,1);
+        s10 = soundPool.load(this,R.raw.cable,1);
+        s11 = soundPool.load(this,R.raw.glass,1);
+        s12 = soundPool.load(this,R.raw.synth1,1);
+        s13 = soundPool.load(this,R.raw.synth2,1);
+        s14 = soundPool.load(this,R.raw.synth3,1);
+        s15 = soundPool.load(this,R.raw.synth4,1);
+        s16 = soundPool.load(this,R.raw.beep,1);
 
 
          //Buttons buttons buttons!!!
@@ -153,34 +157,25 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         pBtn.setOnTouchListener(this);
     //TODO make the play button go through all element of the arraylist and loop through their outputs
 
-
-
-
     }
+
 
 
     //Detection of UI inputs via Buttons and sliders
     @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
+
     public boolean onTouch (View view, MotionEvent motionEvent){
         TextView text = findViewById(R.id.outerBox);
 
+        //**** This should add note from button presses and stores them in the "noteOrder" array
         if(record){
-                nOrder.add(view.getId());
+                noteOrder.add(view.getId());
             }
+
+        //***Note-Buttons Functionality***
         switch (view.getId()) {
-
-
-
-
-
-
-
-
-            //***Note Buttons Functionality***
-
-
             case R.id.buttonOne:
-                //TODO Figure Out Logic For When Button Should Play which Sound
+                //TODO Make choosing sounds possible
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
                     if(!setSound) {
