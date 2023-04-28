@@ -35,6 +35,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     private boolean record;
     private boolean play;
     private boolean setSound;
+    private boolean doublePress;
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     private String mediaPath;
@@ -74,6 +75,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
          record = false;
          play =false;
          setSound = false;
+         doublePress = false;
 
         //Load Default sounds
         s1 = soundPool.load(this,R.raw.keysound,1);
@@ -95,6 +97,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
 
          //Buttons buttons buttons!!!
+        Button selct = findViewById(R.id.select);
         Button vSlider = findViewById(R.id.volumeSlider);
         Button rBtn = findViewById(R.id.recordBtn);
         Button pBtn = findViewById(R.id.playBtn);
@@ -136,6 +139,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         pBtn.setBackgroundColor(0xFFECE2BC);
         box.setBackgroundColor(0XFF0A0A10);
         vSlider.setBackgroundColor(0XFF0A0A10);
+        selct.setBackgroundColor(0xFFECE2BC);
 
         b1.setOnTouchListener(this);
         b2.setOnTouchListener(this);
@@ -155,6 +159,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         b16.setOnTouchListener(this);
         rBtn.setOnTouchListener(this);
         pBtn.setOnTouchListener(this);
+        selct.setOnTouchListener(this);
     //TODO make the play button go through all element of the arraylist and loop through their outputs
 
     }
@@ -178,22 +183,19 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 //TODO Make choosing sounds possible
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
+
+                    if(!setSound && doublePress){
                         soundPool.play(s1, 1, 1, 0, 0, 0.5F);
-                        text.setText("1");
+                        soundX = s1;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s1, 1, 1, 0, 0, 0.5F);
 
                     }
-                    else if(!setSound && motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                        int i=0;
-                        while(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                            i++;
-                        }
-                        if(i>=1000){
-                            soundX = s1;
-                            setSound =true;
-                        }
 
-                    }
+
                     else{
                         soundPool.play(soundX, 1, 1, 0, 0, 0.5F);
                     }
@@ -214,10 +216,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonTwo:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                    view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s2, 1, 1, 0, 0, 0.53F);
 
+                   if(!setSound && doublePress ){
+                        soundPool.play(s2, 1, 1, 0, 0, 0.5F);
+                        soundX = s2;
+                        setSound =true;
+                    }
 
+                   else if(!setSound) {
+                        soundPool.play(s2, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.53F);
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
@@ -230,8 +242,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonThree:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s3, 1, 1, 0, 0, 0.56F);
+
+                    if(!setSound && doublePress ){
+                        soundPool.play(s3, 1, 1, 0, 0, 0.5F);
+                        soundX = s3;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s3, 1, 1, 0, 0, 0.5F);
+                        ;
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.56F);
                     }
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -246,9 +270,22 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonFour:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s4, 1, 1, 0, 0, 0.59F);
+
+                    if(!setSound && doublePress ){
+                        soundPool.play(s4, 1, 1, 0, 0, 0.5F);
+                        soundX = s4;
+                        setSound =true;
                     }
+
+                    else if(!setSound) {
+                        soundPool.play(s4, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.59F);
+                    }
+
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
@@ -260,8 +297,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonFive:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s5, 1, 1, 0, 0, 0.62F);
+
+                    if(!setSound && doublePress ){
+                        soundPool.play(s5, 1, 1, 0, 0, 0.5F);
+                        soundX = s5;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s5, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.62F);
                     }
 
 
@@ -275,10 +324,21 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonSix:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s6, 1, 1, 0, 0, 0.65F);
+
+                    if(!setSound && doublePress ){
+                        soundPool.play(s6, 1, 1, 0, 0, 0.5F);
+                        soundX = s6;
+                        setSound =true;
                     }
 
+                    else if(!setSound) {
+                        soundPool.play(s6, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.65F);
+                    }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
                     if(!record) {
@@ -289,8 +349,21 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonSeven:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s7, 1, 1, 0, 0, 0.68F);
+
+                    if(!setSound && doublePress){
+                        soundPool.play(s7, 1, 1, 0, 0, 0.5F);
+                        soundX = s7;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s7, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.68F);
                     }
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -303,8 +376,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonEight:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s8, 1, 1, 0, 0, 0.71F);
+
+                    if(!setSound && doublePress ){
+                        soundPool.play(s8, 1, 1, 0, 0, 0.5F);
+                        soundX = s8;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s8, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.71F);
                     }
 
 
@@ -318,8 +403,21 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.buttonNine:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
-                    if(!setSound) {
-                        soundPool.play(s9, 1, 1, 0, 0, 0.74F);
+
+                    if(!setSound && doublePress ){
+                        soundPool.play(s9, 1, 1, 0, 0, 0.5F);
+                        soundX = s9;
+                        setSound =true;
+                    }
+
+
+                    else if(!setSound) {
+                        soundPool.play(s9, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.74F);
                     }
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -333,8 +431,19 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s10, 1, 1, 0, 0, 0.74F);
+                    if(!setSound && doublePress ){
+                        soundPool.play(s10, 1, 1, 0, 0, 0.5F);
+                        soundX = s10;
+                        setSound =true;
+                    }
+
+                   else if(!setSound) {
+                        soundPool.play(s10, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.77F);
                     }
 
 
@@ -349,8 +458,19 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s11, 1, 1, 0, 0, 0.74F);
+                    if(!setSound && doublePress ){
+                        soundPool.play(s11, 1, 1, 0, 0, 0.5F);
+                        soundX = s11;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s11, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.80F);
                     }
 
 
@@ -365,9 +485,21 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s12, 1, 1, 0, 0, 0.74F);
+                    if(!setSound && doublePress ){
+                        soundPool.play(s12, 1, 1, 0, 0, 0.5F);
+                        soundX = s12;
+                        setSound =true;
                     }
+
+                    else if(!setSound) {
+                        soundPool.play(s12, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.83F);
+                    }
+
 
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -381,8 +513,19 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s13, 1, 1, 0, 0, 0.74F);
+                    if(!setSound && doublePress ){
+                        soundPool.play(s13, 1, 1, 0, 0, 0.5F);
+                        soundX = s13;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s13, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.86F);
                     }
 
 
@@ -397,8 +540,18 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s14, 1, 1, 0, 0, 0.74F);
+
+                     if(!setSound && doublePress ){
+                        soundPool.play(s14, 1, 1, 0, 0, 0.5F);
+                        soundX = s14;
+                        setSound =true;
+                    }
+                   else if(!setSound) {
+                        soundPool.play(s14, 1, 1, 0, 0, 0.5F);
+
+                    }
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.89F);
                     }
 
 
@@ -413,8 +566,19 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s15, 1, 1, 0, 0, 0.74F);
+                    if(!setSound && doublePress ){
+                        soundPool.play(s15, 1, 1, 0, 0, 0.5F);
+                        soundX = s15;
+                        setSound =true;
+                    }
+
+                   else if(!setSound) {
+                        soundPool.play(s15, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.92F);
                     }
 
 
@@ -429,8 +593,19 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
                     view.setBackgroundColor(0xFFE73939);
 
-                    if(!setSound) {
-                        soundPool.play(s16, 1, 1, 0, 0, 0.74F);
+                     if(!setSound && doublePress ){
+                        soundPool.play(s16, 1, 1, 0, 0, 0.5F);
+                        soundX = s16;
+                        setSound =true;
+                    }
+
+                    else if(!setSound) {
+                        soundPool.play(s16, 1, 1, 0, 0, 0.5F);
+
+                    }
+
+                    else{
+                        soundPool.play(soundX, 1, 1, 0, 0, 0.95F);
                     }
 
 
@@ -498,7 +673,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
                     //TODO get current volume and display it
                 }
+            break;
 
+                //****SelectButton****
+            case R.id.select:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN && !doublePress){
+                    view.setBackgroundColor(0xFFE73939);
+                    doublePress =true;
+
+                }
+                else if(motionEvent.getAction()==MotionEvent.ACTION_DOWN && doublePress){
+                    view.setBackgroundColor(0xFFECE2BC);
+                    doublePress = false;
+                    setSound =false;
+                }
         }
 
 
