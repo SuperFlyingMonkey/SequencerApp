@@ -180,7 +180,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         //***Note-Buttons Functionality***
         switch (view.getId()) {
             case R.id.buttonOne:
-                //TODO Make choosing sounds possible
+        
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
