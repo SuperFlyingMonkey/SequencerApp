@@ -4,6 +4,7 @@
 // be able to edit said wave form
 //TODO add slider
 //TODO add pitch difference between buttons
+//TODO Create a metronome that start and stops with the push of the play button
 
 
 
@@ -27,20 +28,23 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class Main extends AppCompatActivity implements View.OnTouchListener {
 
-    private ArrayList<Integer>noteOrder;
+    private ArrayList<Integer>noteOrder1;
     private boolean record;
-    private boolean play;
+
     private boolean setSound;
     private boolean doublePress;
+    private AtomicBoolean play;
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     private String mediaPath;
     private SoundPool soundPool;
     private int soundX;
+    private int bpm;
     private int s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16;
 
 
@@ -71,11 +75,13 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
 
         //***Initializing Stuff***
-         noteOrder = new ArrayList<Integer>();
+         noteOrder1 = new ArrayList<Integer>();
+
          record = false;
-         play =false;
+         play = new AtomicBoolean(true);
          setSound = false;
          doublePress = false;
+         bpm = 120;
 
         //Load Default sounds
         s1 = soundPool.load(this,R.raw.keysound,1);
@@ -174,7 +180,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
         //**** This should add note from button presses and stores them in the "noteOrder" array
         if(record){
-                noteOrder.add(view.getId());
+                noteOrder1.add(view.getId());
             }
 
         //***Note-Buttons Functionality***
@@ -184,18 +190,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     view.setBackgroundColor(0xFFE73939);
 
+                        //no set sound and select button pressed (shared across all note buttons)
                     if(!setSound && doublePress){
                         soundPool.play(s1, 1, 1, 0, 0, 0.5F);
                         soundX = s1;
                         setSound =true;
                     }
 
+                    //no set sound and select button not pressed so that all sounds can be played by their respective buttons  (shared across all note buttons)
                     else if(!setSound) {
                         soundPool.play(s1, 1, 1, 0, 0, 0.5F);
 
                     }
 
-
+                    // use all buttons to play selected sound  (shared across all note buttons)
                     else{
                         soundPool.play(soundX, 1, 1, 0, 0, 0.5F);
                     }
@@ -251,7 +259,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
                     else if(!setSound) {
                         soundPool.play(s3, 1, 1, 0, 0, 0.5F);
-                        ;
+
                     }
 
                     else{
@@ -623,7 +631,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             case R.id.recordBtn:
 
                 if(motionEvent.getAction()== MotionEvent.ACTION_DOWN) {
-                    if (!record && !play) {
+                    if (!record && !play.get()) {
                         record = true;
                         text.setText("Recording...");
                         //
@@ -647,18 +655,35 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             //***Play button functionality***
             case R.id.playBtn:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    if(!play && !record){
-                        play =true;
+                    //*******TODO get this working*********
+
+                    if(play.get()==false && !record){
+                        play.set(true);
+
+          //              while(play.get()==true){
+
+
+        //                        try {
+      //                              text.setText("run");
+    //                                Thread.sleep((long) (1000 * (60.0 / bpm)));
+  //                              } catch (InterruptedException e) {
+//                                    e.printStackTrace();
+
+                          //  }
+                            soundPool.play(s1, 1, 1, 0, 0, 0.95F);
+            //            }
+
                         //
-                        // TODO add playback of current track
+                        // TODO start playback of current track
                         //
                         //
 
 
                         view.setBackgroundColor(0xFFE73939);
                     }
-                    else if (play){
-                        play = false;
+                    else if (play.get()==true){
+                        play.set(false);
+
                         //
                         //TODO Stop playback of current track
                         //
@@ -676,11 +701,16 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             break;
 
                 //****SelectButton****
+                // used to change modes from play selected sound and play selected sound across all buttons
             case R.id.select:
+
+                //if select button is pressed and has not been press before change colour and set select button indicator value to true
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN && !doublePress){
                     view.setBackgroundColor(0xFFE73939);
                     doublePress =true;
 
+
+                //do the opposite of the previous if statement and also set setSound to false
                 }
                 else if(motionEvent.getAction()==MotionEvent.ACTION_DOWN && doublePress){
                     view.setBackgroundColor(0xFFECE2BC);
