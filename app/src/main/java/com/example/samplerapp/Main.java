@@ -44,6 +44,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     private String mediaPath;
     private SoundPool soundPool;
     private int soundX;
+    private int vol;
     private int bpm;
     private int s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16;
 
@@ -82,6 +83,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
          setSound = false;
          doublePress = false;
          bpm = 120;
+         vol=0;
 
         //Load Default sounds
         s1 = soundPool.load(this,R.raw.keysound,1);
@@ -104,7 +106,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
          //Buttons buttons buttons!!!
         Button selct = findViewById(R.id.select);
-        Button vSlider = findViewById(R.id.volumeSlider);
+        Button vDown = findViewById(R.id.volumeDown);
+        Button vUp  = findViewById(R.id.volumeUp);
         Button rBtn = findViewById(R.id.recordBtn);
         Button pBtn = findViewById(R.id.playBtn);
         View box = findViewById(R.id.outerBox);
@@ -144,7 +147,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         rBtn.setBackgroundColor(0xFFECE2BC);
         pBtn.setBackgroundColor(0xFFECE2BC);
         box.setBackgroundColor(0XFF0A0A10);
-        vSlider.setBackgroundColor(0XFF0A0A10);
+        vDown.setBackgroundColor(0xFFECE2BC);
+        vUp.setBackgroundColor(0xFFECE2BC);
         selct.setBackgroundColor(0xFFECE2BC);
 
         b1.setOnTouchListener(this);
@@ -166,6 +170,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         rBtn.setOnTouchListener(this);
         pBtn.setOnTouchListener(this);
         selct.setOnTouchListener(this);
+        vDown.setOnTouchListener(this);
+        vUp.setOnTouchListener(this);
     //TODO make the play button go through all element of the arraylist and loop through their outputs
 
     }
@@ -694,11 +700,23 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 }
                 break;
             //***Volume slider***
-            case R.id.volumeSlider:
+            case R.id.volumeDown:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
-                    //TODO get current volume and display it
+                    if(vol<10){
+                        vol++;
+                    }
                 }
             break;
+
+            case R.id.volumeUp:
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                        if(vol>0){
+                            vol--;
+                        }
+                }
+                break;
+
+
 
                 //****SelectButton****
                 // used to change modes from play selected sound and play selected sound across all buttons

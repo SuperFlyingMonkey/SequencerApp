@@ -5,7 +5,7 @@
     android:id="@+id/theLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Main">
 
 
     <Button
@@ -170,12 +170,26 @@
 
 
     <Button
-        android:id="@+id/volumeSlider"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
+        android:id="@+id/volumeDown"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
         android:layout_alignBottom="@+id/recordBtn"
+        android:layout_alignRight="@+id/recordBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="75dp" />
+        android:layout_marginBottom="75dp"
+        android:layout_marginRight="52dp"
+        android:text="D"/>
+    <Button
+        android:="@+id/volumeUp"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/recordBtn"
+        android:layout_alignLeft="@+id/volumeDown"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="75dp"
+        android:text="u"
+        android:layout_centerHorizontal="true"
+        />
 
     <Button
         android:layout_width="40dp"
