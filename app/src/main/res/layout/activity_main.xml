@@ -171,22 +171,24 @@
 
     <Button
         android:id="@+id/volumeDown"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/recordBtn"
         android:layout_alignRight="@+id/recordBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="75dp"
         android:layout_marginRight="52dp"
+        android:textColor="@color/black"
         android:text="D"/>
     <Button
         android:id="@+id/volumeUp"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/recordBtn"
         android:layout_alignLeft="@+id/volumeDown"
         android:layout_marginLeft="50dp"
         android:layout_marginBottom="75dp"
+        android:textColor="@color/black"
         android:text="u"
         android:layout_centerHorizontal="true"
         />

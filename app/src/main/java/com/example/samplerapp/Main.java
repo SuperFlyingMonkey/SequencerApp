@@ -699,7 +699,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 }
                 break;
 
-                
+
             //***Volume buttons***
             case R.id.volumeDown:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
