@@ -180,7 +180,7 @@
         android:layout_marginRight="52dp"
         android:text="D"/>
     <Button
-        android:="@+id/volumeUp"
+        android:id="@+id/volumeUp"
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:layout_alignBottom="@+id/recordBtn"
@@ -192,15 +192,14 @@
         />
 
     <Button
-        android:layout_width="40dp"
-        android:layout_height= "40dp"
-        android:id = "@+id/select"
-        android:layout_alignBottom = "@+id/buttonNine"
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignLeft="@+id/buttonNine"
-        android:text="S"
-        android:textColor="@color/black"
+        android:layout_alignBottom="@+id/buttonNine"
         android:layout_marginBottom="75dp"
-        />
+        android:text="S"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/outerBox"
