@@ -1,12 +1,4 @@
-//TODO figure out how to import and save audio
-//TODO implement a way to change BPM and have it affect the recorded playback
-//TODO display the audio waveform
-// be able to edit said wave form
-//TODO add pitch difference between buttons
-//TODO get metronome to stop crashing the app
-
-
-
+//TODO implement metronome(figure out how to keep time without causing crashes)
 package com.example.samplerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,19 +40,14 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         setContentView(R.layout.activity_main);
         RelativeLayout theLayout = findViewById(R.id.theLayout);
         theLayout.setBackgroundColor(0xFF151515);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-            soundPool = new SoundPool.Builder()
-                    .setMaxStreams(16)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        }
-        else{
-            soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC,0);
-        }
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(16)
+                .setAudioAttributes(audioAttributes)
+                .build();
         //***Initializing Stuff***
          noteOrder1 = new ArrayList<Integer>();
          record = false;
@@ -539,10 +526,10 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
             //***Play button functionality***
             case R.id.playBtn:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    //*******TODO get this working*********
-                    if(play.get()==false && !record){
+                    //*******TODO get this working(metronome)*********
+                    if(!play.get() && !record){
                         play.set(true);
-
+            // ***** this is where the time keeping will happen
           //              while(play.get()==true){
 
 
@@ -561,7 +548,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                         //
                         view.setBackgroundColor(0xFFE73939);
                     }
-                    else if (play.get()==true){
+                    else if (play.get()){
                         play.set(false);
                         //
                         //TODO Stop playback of current track
@@ -580,7 +567,6 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     text.setText("Volume:"+Float.toString((float) vol*10));
                 }
             break;
-
             case R.id.volumeUp:
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
                             if(vol<0.9){
@@ -589,11 +575,9 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     text.setText("Volume:"+ Float.toString((float)vol*10));
                 }
                 break;
-
                 //****SelectButton****
                 // used to change modes from play selected sound and play selected sound across all buttons
             case R.id.select:
-
                 //if select button is pressed and has not been press before change colour and set select button indicator value to true
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN && !doublePress){
                     view.setBackgroundColor(0xFFE73939);
@@ -606,9 +590,6 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     setSound =false;
                 }
         }
-
-
         return true;
     }
-
     }
