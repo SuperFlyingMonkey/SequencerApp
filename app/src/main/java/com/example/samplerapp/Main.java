@@ -17,19 +17,20 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 public class Main extends AppCompatActivity implements View.OnTouchListener {
-    private ArrayList<Integer>noteOrder1;
+  private int track[] = new int[16];
     private boolean record;
     private boolean setSound;
     private boolean doublePress;
+
     private AtomicBoolean play;
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     private String mediaPath;
     private SoundPool soundPool;
     private int soundX;
+    private int beat;
     private double vol;
     private int bpm;
     private int s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16;
@@ -49,9 +50,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                 .setAudioAttributes(audioAttributes)
                 .build();
         //***Initializing Stuff***
-         noteOrder1 = new ArrayList<Integer>();
          record = false;
-         play = new AtomicBoolean(true);
+         play = new AtomicBoolean(false);
          setSound = false;
          doublePress = false;
          bpm = 120;
@@ -152,9 +152,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     public boolean onTouch (View view, MotionEvent motionEvent){
         TextView text = findViewById(R.id.outerBox);
         //**** This should add note from button presses and stores them in the "noteOrder" array
-        if(record){
-                noteOrder1.add(view.getId());
-            }
+
         //***Note-Buttons Functionality***
         switch (view.getId()) {
             case R.id.buttonOne:
@@ -166,7 +164,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                         soundX = s1;
                         setSound =true;
                     }
-                    //no set sound and select button not pressed so that all sounds can be played by their respective buttons  (shared across all note buttons)
+                    //all sounds can be played by their respective buttons  (shared across all note buttons)
                     else if(!setSound) {
                         soundPool.play(s1, (float)vol, (float)vol, 0, 0, 0.5F);
 
@@ -174,8 +172,13 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     // use all buttons to play selected sound  (shared across all note buttons)
                     else{
                         soundPool.play(soundX, (float)vol, (float)vol, 0, 0, 0.5F);
+                        if(record){
+                            track[beat]=soundX;
+                        }
                     }
-                    //TODO Give all buttons record functionality
+
+                    //TODO this should be move into a function that records sounds for the track
+
 
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     view.setBackgroundColor(0xFFECE2BC);
@@ -508,10 +511,9 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     if (!record && !play.get()) {
                         record = true;
                         text.setText("Recording...");
-                        //
-                        // TODO add recording
-                        //
                         view.setBackgroundColor(0xFFE73939);
+                        // This figures out which button(beat) is being recorded to
+
                     }
                     else if (record) {
                         record = false;
