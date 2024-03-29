@@ -78,7 +78,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         s15 = soundPool.load(this,R.raw.synth4,1);
         s16 = soundPool.load(this,R.raw.beep,1);
 
-///testcommentforgit
+
          //Buttons buttons buttons!!!
         Button selct = findViewById(R.id.select);
         Button vDown = findViewById(R.id.volumeDown);
