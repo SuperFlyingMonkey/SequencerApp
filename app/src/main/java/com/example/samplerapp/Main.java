@@ -1,4 +1,5 @@
 //TODO implement metronome(figure out how to keep time without causing crashes)
+//TODO refactor/clean up repeating code
 package com.example.samplerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 public class Main extends AppCompatActivity implements View.OnTouchListener {
-  private int track[] = new int[16];
+  private int track[][] = new int[4][16];
     private boolean record;
     private boolean setSound;
     private boolean doublePress;
@@ -30,6 +31,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     private String mediaPath;
     private SoundPool soundPool;
     private int soundX;
+    private int instrument;
     private int beat;
     private double vol;
     private int bpm;
@@ -54,8 +56,9 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
          play = new AtomicBoolean(false);
          setSound = false;
          doublePress = false;
+         instrument = 0;
          bpm = 120;
-         vol= 0.0;
+         vol= 0.5;
 
         //Load Default sounds
         s1 = soundPool.load(this,R.raw.keysound,1);
@@ -173,7 +176,8 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
                     else{
                         soundPool.play(soundX, (float)vol, (float)vol, 0, 0, 0.5F);
                         if(record){
-                            track[beat]=soundX;
+
+                            track[instrument][beat]=soundX;
                         }
                     }
 

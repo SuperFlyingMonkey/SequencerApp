@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/gradle.xml
+.idea/deploymentTargetDropDown.xml
+.idea/deploymentTargetDropDown.xml
+build.gradle
+gradle/wrapper/gradle-wrapper.properties
